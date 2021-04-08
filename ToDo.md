@@ -7,8 +7,6 @@ Lineage Dungeon Crawler
 
 ### In Progress
 
-- [ ] Add the player and movement.
-
 - [ ] Add the Main Menu.
 
 - [ ] Add in a Player Info Screen.
@@ -19,3 +17,5 @@ Player name, age, gold, xp, stats, traits, etc.
 Basic overview of the current equipment on and inventory.
 
 ### Done
+
+- [X] Add the player and movement.
