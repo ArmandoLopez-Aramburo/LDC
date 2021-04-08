@@ -15,7 +15,8 @@ Player name, age, gold, xp, stats, traits, etc.
 - [ ] Add in a Player Inventory Screen
 Basic overview of the current equipment on and inventory.
 
-# In Progress
+
+### In Progress
 
 
 
