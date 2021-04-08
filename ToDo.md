@@ -1,9 +1,6 @@
 # LDC
 Lineage Dungeon Crawler
 
-To Do Tasks:
-
-
 ### Todo
 
 - [ ] Add the player and movement.
