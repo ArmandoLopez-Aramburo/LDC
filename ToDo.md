@@ -9,13 +9,16 @@ Lineage Dungeon Crawler
 
 - [ ] Add the Main Menu.
 
-- [ ] Add in a Player Info Screen.
-It will have the necessary information about the player.
-Player name, age, gold, xp, stats, traits, etc.
+- [ ] Update the Player Info Screen
+name, age, gold, xp, stats, traits, etc.
 
-- [ ] Add in a Player Inventory Screen
-Basic overview of the current equipment on and inventory.
+-[ ] Update the Player Inventory Screen
+To include current gear and carry weight.
 
 ### Done
 
 - [X] Add the player and movement.
+
+- [X] Add in a Player Info Screen.
+
+- [X] Add in a Player Inventory Screen
