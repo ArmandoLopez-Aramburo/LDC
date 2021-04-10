@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Dashboard : MonoBehaviour
 {
+    [Header("Panels")]
     [SerializeField] GameObject InventoryPanel;
     [SerializeField] GameObject JournalPanel;
     [SerializeField] GameObject MapPanel;
@@ -12,23 +13,30 @@ public class Dashboard : MonoBehaviour
     bool JournalStatus = false;
     bool MapStatus = false;
 
+    bool Status = false;
+
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            InventoryStatus = !InventoryStatus;
-            InventoryPanel.SetActive(InventoryStatus);
+            InventoryStatus = PanelState(InventoryPanel, InventoryStatus);
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
-            JournalStatus = !JournalStatus;
-            JournalPanel.SetActive(JournalStatus);
+
+            JournalStatus = PanelState(JournalPanel, JournalStatus);
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
-            MapStatus = !MapStatus;
-            MapPanel.SetActive(MapStatus);
+            MapStatus = PanelState(MapPanel, MapStatus);
         }
+    }
+
+    bool PanelState(GameObject Panel, bool Status)
+    {
+        Status = !Status;
+        Panel.SetActive(Status);
+        return Status;
     }
 }
