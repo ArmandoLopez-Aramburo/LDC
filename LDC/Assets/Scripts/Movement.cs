@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Movement : MonoBehaviour
 {
     public float MOVE_SPEED = 10.0f;
@@ -14,6 +15,8 @@ public class Movement : MonoBehaviour
     void Awake()
     {
         rb = this.GetComponent<Rigidbody2D>();
+        this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        this.GetComponent<Rigidbody2D>().gravityScale = 0;
     }
 
     // Update is called once per frame

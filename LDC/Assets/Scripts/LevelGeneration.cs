@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class LevelGeneration : MonoBehaviour
 {
+    [Header("Starting Positions")]
     public Transform[] startingPositions;
+
+    [Header("Room Prefabs")]
     public GameObject[] TopRooms;
     public GameObject[] LeftRooms;
     public GameObject[] RightRooms;
+
+    [SerializeField] GameObject Player;
 
     private int direction;
     private int roomVariant;
@@ -16,6 +21,7 @@ public class LevelGeneration : MonoBehaviour
     private float TimeBtwnRoom;
     public float startTimeBtwnRoom = 0.25f;
 
+    [Header("Dungeon Area")]
     public float minX;
     public float maxX;
     public float minY;
@@ -26,13 +32,16 @@ public class LevelGeneration : MonoBehaviour
     void Start()
     {
         int randStartingPos = Random.Range(0, startingPositions.Length);
-        transform.position = startingPositions[3].position;
+        transform.position = startingPositions[direction].position;
         Instantiate(TopRooms[0], transform.position, Quaternion.identity);
+
+        Player.transform.position = startingPositions[direction].position;
 
         //direction = Random.Range(1, 6);
         direction = 2;
     }
 
+    // Update is called to spawn the rooms on a delay.
     private void Update()
     {
         if(TimeBtwnRoom <= 0 && !StopGenerating)
@@ -46,6 +55,7 @@ public class LevelGeneration : MonoBehaviour
         }
     }
 
+    // Move Function to spawn the Procedurally Generated Dungeon.
     private void Move()
     {
         if (direction == 1 || direction == 2) // Move Right
@@ -107,6 +117,7 @@ public class LevelGeneration : MonoBehaviour
         print("Direction:" + direction);
     }
 
+    // Place Room function that instantiates the correct room type.
     private Vector2 PlaceRoom(Vector2 temp, string roomType)
     {
         roomVariant = Random.Range(0, RightRooms.Length);
