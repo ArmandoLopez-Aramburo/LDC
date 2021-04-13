@@ -35,7 +35,7 @@ public class LevelGeneration : MonoBehaviour
         transform.position = startingPositions[direction].position;
         Instantiate(TopRooms[0], transform.position, Quaternion.identity);
 
-        Player.transform.position = startingPositions[direction].position;
+        if(Player != null) Player.transform.position = startingPositions[direction].position;
 
         //direction = Random.Range(1, 6);
         direction = 2;
