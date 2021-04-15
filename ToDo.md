@@ -5,6 +5,10 @@ Lineage Dungeon Crawler
 
 - [ ] Add Turn Based GamePlay.
 
+- [ ] Add in Spawnable Enemies.
+
+- [ ] Add in Spawnable chests.
+
 ### In Progress
 
 - [ ] Add the Main Menu.
