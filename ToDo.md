@@ -11,8 +11,6 @@ Lineage Dungeon Crawler
 
 ### In Progress
 
-- [ ] Add the Main Menu.
-
 - [ ] Update the Player Info Screen
 name, age, gold, xp, stats, traits, etc.
 
@@ -28,3 +26,5 @@ To include current gear and carry weight.
 - [X] Add in a Player Inventory Screen
 
 - [X] Add in a Dungeon Generation System.
+
+- [X] Add the Main Menu.
