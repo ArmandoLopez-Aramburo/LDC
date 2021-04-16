@@ -9,13 +9,15 @@ Lineage Dungeon Crawler
 
 - [ ] Add in Spawnable chests.
 
-### In Progress
-
 - [ ] Update the Player Info Screen
 name, age, gold, xp, stats, traits, etc.
 
 -[ ] Update the Player Inventory Screen
 To include current gear and carry weight.
+
+### In Progress
+
+- [X] Add a credits page to the Start Menu.
 
 ### Done
 
