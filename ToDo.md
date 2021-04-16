@@ -3,8 +3,6 @@ Lineage Dungeon Crawler
 
 ### Todo
 
-- [ ] Add Turn Based GamePlay.
-
 - [ ] Add in Spawnable Enemies.
 
 - [ ] Add in Spawnable chests.
@@ -18,6 +16,8 @@ name, age, gold, xp, stats, traits, etc.
 To include current gear and carry weight.
 
 ### Done
+
+- [X] Add Turn Based GamePlay.
 
 - [X] Add the player and movement.
 
