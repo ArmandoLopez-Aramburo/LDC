@@ -2061,9 +2061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea224401be00f4749a8bd27ae934ce9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryPanel: {fileID: 5401183404226727287}
-  JournalPanel: {fileID: 1707844218}
-  MapPanel: {fileID: 21014944}
+  Inventory: {fileID: 0}
 --- !u!4 &5401183403985489562
 Transform:
   m_ObjectHideFlags: 0
