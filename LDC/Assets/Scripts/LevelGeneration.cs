@@ -21,6 +21,8 @@ public class LevelGeneration : MonoBehaviour
     private float TimeBtwnRoom;
     public float startTimeBtwnRoom = 0.25f;
 
+    public GameObject Dungeon;
+
     [Header("Dungeon Area")]
     public float minX;
     public float maxX;
@@ -28,25 +30,32 @@ public class LevelGeneration : MonoBehaviour
 
     private bool StopGenerating;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        int randStartingPos = Random.Range(0, startingPositions.Length);
-        transform.position = startingPositions[direction].position;
-        Instantiate(TopRooms[0], transform.position, Quaternion.identity);
-
-        if(Player != null) Player.transform.position = startingPositions[direction].position;
-
-        //direction = Random.Range(1, 6);
-        direction = 2;
+        if(GameData.currentDungeon != null)
+        {
+            GameObject temp = GameObject.Find("Dungeon");
+            temp = GameData.currentDungeon;
+        }
     }
-
     // Update is called to spawn the rooms on a delay.
     private void Update()
     {
+        if(GameData.GenerateDungeon == true && GameData.doOnce)
+        {
+            int randStartingPos = Random.Range(0, startingPositions.Length);
+            transform.position = startingPositions[randStartingPos].position;
+            GameObject room = Instantiate(TopRooms[0], transform.position, Quaternion.identity);
+            room.transform.SetParent(Dungeon.transform);
+            if (Player != null) Player.transform.position = startingPositions[randStartingPos].position;
+
+            direction = Random.Range(1, 6);
+
+            GameData.doOnce = false;
+        }
         if(TimeBtwnRoom <= 0 && !StopGenerating)
         {
-            Move();
+            if(GameData.GenerateDungeon) Move();
             TimeBtwnRoom = startTimeBtwnRoom;
         }
         else
@@ -112,6 +121,7 @@ public class LevelGeneration : MonoBehaviour
                 Debug.Log("Stop Generating!!!");
                 //Stop Level Generation
                 StopGenerating = true;
+                GameData.GenerateDungeon = false;
             }
         }
         print("Direction:" + direction);
@@ -122,9 +132,9 @@ public class LevelGeneration : MonoBehaviour
     {
         roomVariant = Random.Range(0, RightRooms.Length);
         Debug.Log(roomVariant);
-        if(roomType == "right") Instantiate(RightRooms[roomVariant], temp, Quaternion.identity);
-        if (roomType == "left") Instantiate(LeftRooms[roomVariant], temp, Quaternion.identity);
-        if (roomType == "top") Instantiate(TopRooms[roomVariant], temp, Quaternion.identity);
+        if(roomType == "right") (Instantiate(RightRooms[roomVariant], temp, Quaternion.identity)).transform.SetParent(Dungeon.transform);
+        if (roomType == "left") (Instantiate(LeftRooms[roomVariant], temp, Quaternion.identity)).transform.SetParent(Dungeon.transform);
+        if (roomType == "top") (Instantiate(TopRooms[roomVariant], temp, Quaternion.identity)).transform.SetParent(Dungeon.transform);
         return temp;
     }
 }

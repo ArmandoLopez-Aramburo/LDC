@@ -11,6 +11,12 @@ public class GameData : MonoBehaviour
     public static float playerCurrentHP = 100;
     public static float playerCurrentXP = 0;
 
+    public static bool outOfCombat = false;
+    public static bool GenerateDungeon = true;
+    public static bool doOnce = true;
+
+    public static GameObject currentDungeon;
+
     void Awake()
     {
         DontDestroyOnLoad(this);
