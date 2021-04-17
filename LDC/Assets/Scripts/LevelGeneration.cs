@@ -30,13 +30,9 @@ public class LevelGeneration : MonoBehaviour
 
     private bool StopGenerating;
 
-    private void Awake()
+    private void Start()
     {
-        if(GameData.currentDungeon != null)
-        {
-            GameObject temp = GameObject.Find("Dungeon");
-            temp = GameData.currentDungeon;
-        }
+        Dungeon = GameObject.Find("Dungeon");
     }
     // Update is called to spawn the rooms on a delay.
     private void Update()

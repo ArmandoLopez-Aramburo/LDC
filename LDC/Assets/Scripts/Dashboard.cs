@@ -7,7 +7,6 @@ public class Dashboard : MonoBehaviour
 {
     [SerializeField] public GameObject Inventory;
     [SerializeField] public GameObject Player;
-    [SerializeField] public GameObject Dungeon;
 
     bool InventoryStatus = false;
 
@@ -15,6 +14,7 @@ public class Dashboard : MonoBehaviour
     {
         if (GameData.outOfCombat == true)
         {
+            
             Player.transform.position = GameData.playerPos;
             GameData.outOfCombat = false;
         }
