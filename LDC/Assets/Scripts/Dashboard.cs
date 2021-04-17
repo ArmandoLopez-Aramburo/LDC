@@ -7,8 +7,18 @@ public class Dashboard : MonoBehaviour
 {
     [SerializeField] GameObject Inventory;
     [SerializeField] GameObject Player;
+    [SerializeField] GameObject Dungeon;
 
     bool InventoryStatus = false;
+
+    private void Start()
+    {
+        if (GameData.outOfCombat == true)
+        {
+            Player.transform.position = GameData.playerPos;
+            GameData.outOfCombat = false;
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,16 +32,6 @@ public class Dashboard : MonoBehaviour
         {
             GameData.playerPos = Player.gameObject.transform.position;
             StartBattle();
-            GameData.currentDungeon = GameObject.Find("Dungeon");
-            print(GameData.currentDungeon.name);
-        }
-
-        if(GameData.outOfCombat == true)
-        {
-            GameObject temp = GameObject.Find("Dungeon");
-            temp = GameData.currentDungeon;
-            Player.transform.position = GameData.playerPos;
-            GameData.outOfCombat = false;
         }
     }
 
