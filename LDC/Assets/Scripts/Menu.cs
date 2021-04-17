@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
     [Header("Menu's")]
-    public GameObject MainMenu;
-    public GameObject SettingsMenu;
-    public GameObject ExitMenu;
+    [SerializeField] public GameObject MainMenu;
+    [SerializeField] public GameObject SettingsMenu;
+    [SerializeField] public GameObject CreditsMenu;
+    [SerializeField] public GameObject ExitMenu;
 
     public void StartGame()
     {
@@ -18,6 +19,11 @@ public class Menu : MonoBehaviour
     public void Settings(bool state)
     {
         MenuSelect(SettingsMenu, state);
+    }
+
+    public void Credits(bool state)
+    {
+        MenuSelect(CreditsMenu, state);
     }
 
     public void ExitGame(bool state)
