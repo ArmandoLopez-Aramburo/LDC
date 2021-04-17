@@ -5,9 +5,9 @@ using UnityEngine;
 public class Journal : MonoBehaviour
 {
     [Header("Tabs")]
-    [SerializeField] GameObject QuestPanel;
-    [SerializeField] GameObject PlayerPanel;
-    [SerializeField] GameObject HistoryPanel;
+    [SerializeField] public GameObject QuestPanel;
+    [SerializeField] public GameObject PlayerPanel;
+    [SerializeField] public GameObject HistoryPanel;
 
     public void Quest()
     {

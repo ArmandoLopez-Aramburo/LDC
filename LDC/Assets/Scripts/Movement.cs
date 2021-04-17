@@ -10,8 +10,8 @@ public class Movement : MonoBehaviour
     private Vector3 moveDir;
     // Start is called before the first frame update
 
-    [SerializeField] private Sprite[] Character;
-    [SerializeField] private GameObject CharacterSprite;
+    [SerializeField] private Sprite[] Character = null;
+    [SerializeField] private GameObject CharacterSprite = null;
     void Awake()
     {
         rb = this.GetComponent<Rigidbody2D>();

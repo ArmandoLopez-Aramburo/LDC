@@ -12,7 +12,7 @@ public class LevelGeneration : MonoBehaviour
     public GameObject[] LeftRooms;
     public GameObject[] RightRooms;
 
-    [SerializeField] GameObject Player;
+    [SerializeField] public GameObject Player;
 
     private int direction;
     private int roomVariant;
@@ -71,7 +71,6 @@ public class LevelGeneration : MonoBehaviour
         {
             if (transform.position.x < maxX)
             {
-                print("Moving Right");
                 Vector2 newPos = new Vector2(transform.position.x + moveAmount, transform.position.y);
                 transform.position = PlaceRoom(newPos, "right");
 
@@ -89,7 +88,6 @@ public class LevelGeneration : MonoBehaviour
         }
         else if (direction == 3 || direction == 4) // Move Left
         {
-            Debug.Log("Move Left");
             if(transform.position.x > minX)
             {
                 Vector2 newPos = new Vector2(transform.position.x - moveAmount, transform.position.y);
@@ -124,14 +122,12 @@ public class LevelGeneration : MonoBehaviour
                 GameData.GenerateDungeon = false;
             }
         }
-        print("Direction:" + direction);
     }
 
     // Place Room function that instantiates the correct room type.
     private Vector2 PlaceRoom(Vector2 temp, string roomType)
     {
         roomVariant = Random.Range(0, RightRooms.Length);
-        Debug.Log(roomVariant);
         if(roomType == "right") (Instantiate(RightRooms[roomVariant], temp, Quaternion.identity)).transform.SetParent(Dungeon.transform);
         if (roomType == "left") (Instantiate(LeftRooms[roomVariant], temp, Quaternion.identity)).transform.SetParent(Dungeon.transform);
         if (roomType == "top") (Instantiate(TopRooms[roomVariant], temp, Quaternion.identity)).transform.SetParent(Dungeon.transform);

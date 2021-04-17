@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Dashboard : MonoBehaviour
 {
-    [SerializeField] GameObject Inventory;
-    [SerializeField] GameObject Player;
-    [SerializeField] GameObject Dungeon;
+    [SerializeField] public GameObject Inventory;
+    [SerializeField] public GameObject Player;
+    [SerializeField] public GameObject Dungeon;
 
     bool InventoryStatus = false;
 
