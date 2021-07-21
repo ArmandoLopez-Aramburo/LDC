@@ -13,10 +13,18 @@ public class DoorWay : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Wall")
+        if(collision.gameObject.tag != "Player")
         {
             Destroy(collision.gameObject);
-            this.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        this.gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag != "Player" && collision.gameObject.tag == "Floor")
+        {
+            Destroy(collision.gameObject);
         }
         this.gameObject.SetActive(false);
     }

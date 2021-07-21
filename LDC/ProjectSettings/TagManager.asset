@@ -9,6 +9,9 @@ TagManager:
   - Start
   - Wall
   - Enemy
+  - Floor
+  - Templates
+  - Level
   layers:
   - Default
   - TransparentFX
@@ -46,9 +49,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Floor
+    uniqueID: 1155808909
+    locked: 0
+  - name: Shadow
+    uniqueID: 367140981
+    locked: 0
   - name: Player
     uniqueID: 2370529663
     locked: 0
+  - name: Room
+    uniqueID: 3255753049
+    locked: 0
   - name: UI
     uniqueID: 3920189409
+    locked: 0
+  - name: SpawnPoints
+    uniqueID: 1219314789
     locked: 0
