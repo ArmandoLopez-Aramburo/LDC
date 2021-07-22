@@ -7,8 +7,10 @@ public class Dashboard : MonoBehaviour
 {
     [SerializeField] public GameObject Inventory;
     [SerializeField] public GameObject Player;
+    [SerializeField] public GameObject QuitPanel;
 
     bool InventoryStatus = false;
+    bool QuitStatus = false;
 
     private void Start()
     {
@@ -33,10 +35,20 @@ public class Dashboard : MonoBehaviour
             GameData.playerPos = Player.gameObject.transform.position;
             StartBattle();
         }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            QuitStatus = !QuitStatus;
+            QuitPanel.SetActive(QuitStatus);
+        }
     }
 
     public void StartBattle()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
