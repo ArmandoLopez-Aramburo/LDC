@@ -12,22 +12,23 @@ public class SpawnRoom : MonoBehaviour
     // 3 = Need Right Door
         
     private DungeonPrefabs templates;
-
+    private DoorWay door;
     private LevelGeneration stats;
 
     private GameObject temp;
 
     private int rand;
     public bool Spawned = false;
-    public bool OpenHallway = true;
 
     private void Start()
     {
         templates = GameObject.FindGameObjectWithTag("Templates").GetComponent<DungeonPrefabs>();
         stats = GameObject.FindGameObjectWithTag("Level").GetComponent<LevelGeneration>();
+        door = this.transform.GetChild(0).GetComponentInChildren<DoorWay>();
         Invoke("Spawn", 2f);
     }
 
+    // Function Spawner
     private void Spawn()
     {
         if(stats.MediumRoom == 0)
@@ -38,7 +39,6 @@ public class SpawnRoom : MonoBehaviour
         {
             if (stats.MediumRoom >= 0 && !stats.M_HiddenRooms)
             {
-                Debug.Log("Regular Room");
                 if (roomType == "hallway")
                 {
                     if (OpeningDirection == 0)
@@ -62,8 +62,6 @@ public class SpawnRoom : MonoBehaviour
                         RoomSpawner(3, rand, false);
                     }
                 }
-                Spawned = true;
-                OpenHallway = false;
             }
             
             if(stats.M_HiddenRooms)
@@ -92,13 +90,10 @@ public class SpawnRoom : MonoBehaviour
                         RoomSpawner(3, rand, true);
                     }
                 }
-                Spawned = true;
-                OpenHallway = false;
             }
 
             if (roomType == "room")
             {
-
                 if (OpeningDirection == 0)
                 {
                     rand = Random.Range(0, templates.TD_Hallways.Length);
@@ -131,10 +126,27 @@ public class SpawnRoom : MonoBehaviour
         // If room Type is "room" and not a Secret Room spawn a Hallway
         if (roomType == "room" && !SecretRoom)
         {
-            if (direction == 0) Instantiate(templates.TD_Hallways[rand], this.transform.position + GetLocation(templates.TD_Hallways[rand], 0), Quaternion.identity);
-            if (direction == 1) Instantiate(templates.LR_Hallways[rand], this.transform.position + GetLocation(templates.LR_Hallways[rand], 1), Quaternion.identity);
-            if (direction == 2) Instantiate(templates.TD_Hallways[rand], this.transform.position + GetLocation(templates.TD_Hallways[rand], 2), Quaternion.identity);
-            if (direction == 3) Instantiate(templates.LR_Hallways[rand], this.transform.position + GetLocation(templates.LR_Hallways[rand], 3), Quaternion.identity);
+            if (direction == 0)
+            {
+                Instantiate(templates.TD_Hallways[rand], this.transform.position + GetLocation(templates.TD_Hallways[rand], 0), Quaternion.identity);
+
+                door.gameObject.SetActive(true);
+            }
+            if (direction == 1)
+            {
+                Instantiate(templates.LR_Hallways[rand], this.transform.position + GetLocation(templates.LR_Hallways[rand], 1), Quaternion.identity);
+                door.gameObject.SetActive(true);
+            }
+            if (direction == 2)
+            {
+                Instantiate(templates.TD_Hallways[rand], this.transform.position + GetLocation(templates.TD_Hallways[rand], 2), Quaternion.identity);
+                door.gameObject.SetActive(true);
+            }
+            if (direction == 3)
+            {
+                Instantiate(templates.LR_Hallways[rand], this.transform.position + GetLocation(templates.LR_Hallways[rand], 3), Quaternion.identity);
+                door.gameObject.SetActive(true);
+            }
         }
 
         // If room Type is "hallway" spawn a room and if that room is not a Secret Room then create other spawn locations.
@@ -143,47 +155,53 @@ public class SpawnRoom : MonoBehaviour
             if (direction == 0)
             {
                 temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 0), Quaternion.identity);
-                if(!SecretRoom) ChooseHallways(2, temp);
+                if (SecretRoom) temp.name = "Hidden Room";
+                door.gameObject.SetActive(true);
+                if (!SecretRoom) ChooseHallways(2, temp);
             }
             if (direction == 1)
             {
                 temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 1), Quaternion.identity);
+                if (SecretRoom) temp.name = "Hidden Room";
+                door.gameObject.SetActive(true);
                 if (!SecretRoom) ChooseHallways(3, temp);
             }
             if (direction == 2)
             {
                 temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 2), Quaternion.identity);
+                if (SecretRoom) temp.name = "Hidden Room";
+                door.gameObject.SetActive(true);
                 if (!SecretRoom) ChooseHallways(0, temp);
             }
             if (direction == 3)
             {
                 temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 3), Quaternion.identity);
+                if (SecretRoom) temp.name = "Hidden Room";
+                door.gameObject.SetActive(true);
                 if (!SecretRoom) ChooseHallways(1, temp);
             }
             if(!SecretRoom) stats.MediumRoom--;
         }
     }
 
-    // Randomly picks which room side to generate a hallway
+    // Randomly picks a side to generate a hallway
     private void ChooseHallways(int direction, GameObject temp)
     {
         int x;
         for(int i = 0; i < 2; i++)
         {
             x = Random.Range(0, 4);
-            Debug.Log(x);
-            temp.transform.GetChild(2).GetChild(x).gameObject.SetActive(true);
+            if(x != direction)
+            {
+                temp.transform.GetChild(2).GetChild(x).gameObject.SetActive(true);
+            }
         }
-        temp.transform.GetChild(2).GetChild(direction).gameObject.SetActive(true);
     }
 
     // Get's the position of the spawner.
     private Vector3 GetLocation(GameObject temp, int direction)
     {
-        // 0 Top
-        // 1 Right
-        // 2 Bottom
-        // 3 Left
+        // 0:Top, 1:Right, 2:Bottom, 3:Left
         Vector3 spawnLocation = new Vector3(0,0,0);
         if(direction == 0)
         {
@@ -209,10 +227,12 @@ public class SpawnRoom : MonoBehaviour
     {
         if(collision.CompareTag("SpawnPoint") && collision.GetComponent<SpawnRoom>().Spawned == true)
         {
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
+            //Destroy(this.gameObject);
         }
         if (collision.CompareTag("SpawnPoint") && this.Spawned == true)
         {
+            collision.gameObject.SetActive(false);
             Destroy(collision.gameObject);
         }
     }
