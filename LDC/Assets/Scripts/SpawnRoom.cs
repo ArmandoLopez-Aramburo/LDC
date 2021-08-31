@@ -25,7 +25,7 @@ public class SpawnRoom : MonoBehaviour
         templates = GameObject.FindGameObjectWithTag("Templates").GetComponent<DungeonPrefabs>();
         stats = GameObject.FindGameObjectWithTag("Level").GetComponent<LevelGeneration>();
         door = this.transform.GetChild(0).GetComponentInChildren<DoorWay>();
-        Invoke("Spawn", 3f);
+        Invoke("Spawn", 0.1f);
     }
 
     // Function Spawner
@@ -128,23 +128,23 @@ public class SpawnRoom : MonoBehaviour
         {
             if (direction == 0)
             {
-                Instantiate(templates.TD_Hallways[rand], this.transform.position + GetLocation(templates.TD_Hallways[rand], 0), Quaternion.identity);
+                Instantiate(templates.TD_Hallways[rand], this.transform.position + GetLocation(templates.TD_Hallways[rand], 0), Quaternion.identity, stats.Dungeon.transform);
 
                 door.gameObject.SetActive(true);
             }
             if (direction == 1)
             {
-                Instantiate(templates.LR_Hallways[rand], this.transform.position + GetLocation(templates.LR_Hallways[rand], 1), Quaternion.identity);
+                Instantiate(templates.LR_Hallways[rand], this.transform.position + GetLocation(templates.LR_Hallways[rand], 1), Quaternion.identity, stats.Dungeon.transform);
                 door.gameObject.SetActive(true);
             }
             if (direction == 2)
             {
-                Instantiate(templates.TD_Hallways[rand], this.transform.position + GetLocation(templates.TD_Hallways[rand], 2), Quaternion.identity);
+                Instantiate(templates.TD_Hallways[rand], this.transform.position + GetLocation(templates.TD_Hallways[rand], 2), Quaternion.identity, stats.Dungeon.transform);
                 door.gameObject.SetActive(true);
             }
             if (direction == 3)
             {
-                Instantiate(templates.LR_Hallways[rand], this.transform.position + GetLocation(templates.LR_Hallways[rand], 3), Quaternion.identity);
+                Instantiate(templates.LR_Hallways[rand], this.transform.position + GetLocation(templates.LR_Hallways[rand], 3), Quaternion.identity, stats.Dungeon.transform);
                 door.gameObject.SetActive(true);
             }
         }
@@ -154,28 +154,28 @@ public class SpawnRoom : MonoBehaviour
         {
             if (direction == 0)
             {
-                temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 0), Quaternion.identity);
+                temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 0), Quaternion.identity, stats.Dungeon.transform);
                 if (SecretRoom) temp.name = "Hidden Room";
                 door.gameObject.SetActive(true);
                 if (!SecretRoom) ChooseHallways(2, temp);
             }
             if (direction == 1)
             {
-                temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 1), Quaternion.identity);
+                temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 1), Quaternion.identity, stats.Dungeon.transform);
                 if (SecretRoom) temp.name = "Hidden Room";
                 door.gameObject.SetActive(true);
                 if (!SecretRoom) ChooseHallways(3, temp);
             }
             if (direction == 2)
             {
-                temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 2), Quaternion.identity);
+                temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 2), Quaternion.identity, stats.Dungeon.transform);
                 if (SecretRoom) temp.name = "Hidden Room";
                 door.gameObject.SetActive(true);
                 if (!SecretRoom) ChooseHallways(0, temp);
             }
             if (direction == 3)
             {
-                temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 3), Quaternion.identity);
+                temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 3), Quaternion.identity, stats.Dungeon.transform);
                 if (SecretRoom) temp.name = "Hidden Room";
                 door.gameObject.SetActive(true);
                 if (!SecretRoom) ChooseHallways(1, temp);

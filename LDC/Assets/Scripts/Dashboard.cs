@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class Dashboard : MonoBehaviour
 {
+    [Header("MiniScreen")]
     [SerializeField] public GameObject Inventory;
     [SerializeField] public GameObject Player;
     [SerializeField] public GameObject QuitPanel;
+    [SerializeField] public GameObject Journal;
 
     bool InventoryStatus = false;
     bool QuitStatus = false;
+    bool JournalStatus = false;
 
     private void Start()
     {
@@ -35,6 +38,13 @@ public class Dashboard : MonoBehaviour
             GameData.playerPos = Player.gameObject.transform.position;
             StartBattle();
         }
+
+        if(Input.GetKeyDown(KeyCode.J))
+        {
+            JournalStatus = !JournalStatus;
+            Journal.SetActive(JournalStatus);
+        }
+
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             QuitStatus = !QuitStatus;
