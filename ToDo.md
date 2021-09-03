@@ -3,9 +3,6 @@ Lineage Dungeon Crawler
 
 ### Todo
 
-- [ ] Start room needs to be created.
-	- [ ] Have entries be randomly selected to generate the hallways etc.
-
 - [ ] Room Collisions so we don't have any rooms generate ontop of previously created rooms
 
 - [ ] Start room entry/exit button so the user can leave the dungeon per every 5 levels cleared
@@ -17,15 +14,14 @@ Lineage Dungeon Crawler
 
 - [ ] Add in Spawnable chests.
 
-- [ ] Update the Player Info Screen
-name, age, gold, xp, stats, traits, etc.
+- [ ] Update the Player Info Screen name, age, gold, xp, stats, traits, etc.
 
--[ ] Update the Player Inventory Screen
-To include current gear and carry weight.
+- [ ] Update the Player Inventory Screen To include current gear and carry weight.
 
 ### In Progress
 
-
+- [ ] Start room needs to be created.
+	- [ ] Have entries be randomly selected to generate the hallways etc.
 
 ### Done
 
