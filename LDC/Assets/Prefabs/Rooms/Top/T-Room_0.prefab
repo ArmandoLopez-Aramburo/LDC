@@ -376,7 +376,6 @@ MonoBehaviour:
   OpeningDirection: 0
   roomType: room
   Spawned: 0
-  OpenHallway: 0
 --- !u!50 &6006800001881350485
 Rigidbody2D:
   serializedVersion: 4
@@ -1558,7 +1557,6 @@ MonoBehaviour:
   OpeningDirection: 1
   roomType: room
   Spawned: 0
-  OpenHallway: 0
 --- !u!50 &1666925211121354044
 Rigidbody2D:
   serializedVersion: 4
@@ -1764,7 +1762,6 @@ MonoBehaviour:
   OpeningDirection: 3
   roomType: room
   Spawned: 0
-  OpenHallway: 0
 --- !u!50 &7679451290033437511
 Rigidbody2D:
   serializedVersion: 4
@@ -6359,7 +6356,6 @@ MonoBehaviour:
   OpeningDirection: 2
   roomType: room
   Spawned: 0
-  OpenHallway: 0
 --- !u!50 &6696919681427685788
 Rigidbody2D:
   serializedVersion: 4
