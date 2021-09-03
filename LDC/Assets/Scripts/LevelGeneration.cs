@@ -32,6 +32,11 @@ public class LevelGeneration : MonoBehaviour
         startingRoomSpawned = true;
     }
 
+    public void ExitRoomObjects(GameObject temp)
+    {
+        temp.name = "NEWWWWW EXIT";
+    }
+
     // Function that chooses which hallway is "open" to be used by the dungeon generation.
     private void ChooseHallways(GameObject temp)
     {

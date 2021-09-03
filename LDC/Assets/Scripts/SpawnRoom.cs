@@ -128,23 +128,22 @@ public class SpawnRoom : MonoBehaviour
         {
             if (direction == 0)
             {
-                Instantiate(templates.TD_Hallways[rand], this.transform.position + GetLocation(templates.TD_Hallways[rand], 0), Quaternion.identity, stats.Dungeon.transform);
-
+                temp = Instantiate(templates.TD_Hallways[rand], this.transform.position + GetLocation(templates.TD_Hallways[rand], 0), Quaternion.identity, stats.Dungeon.transform);
                 door.gameObject.SetActive(true);
             }
             if (direction == 1)
             {
-                Instantiate(templates.LR_Hallways[rand], this.transform.position + GetLocation(templates.LR_Hallways[rand], 1), Quaternion.identity, stats.Dungeon.transform);
+                temp = Instantiate(templates.LR_Hallways[rand], this.transform.position + GetLocation(templates.LR_Hallways[rand], 1), Quaternion.identity, stats.Dungeon.transform);
                 door.gameObject.SetActive(true);
             }
             if (direction == 2)
             {
-                Instantiate(templates.TD_Hallways[rand], this.transform.position + GetLocation(templates.TD_Hallways[rand], 2), Quaternion.identity, stats.Dungeon.transform);
+                temp = Instantiate(templates.TD_Hallways[rand], this.transform.position + GetLocation(templates.TD_Hallways[rand], 2), Quaternion.identity, stats.Dungeon.transform);
                 door.gameObject.SetActive(true);
             }
             if (direction == 3)
             {
-                Instantiate(templates.LR_Hallways[rand], this.transform.position + GetLocation(templates.LR_Hallways[rand], 3), Quaternion.identity, stats.Dungeon.transform);
+                temp = Instantiate(templates.LR_Hallways[rand], this.transform.position + GetLocation(templates.LR_Hallways[rand], 3), Quaternion.identity, stats.Dungeon.transform);
                 door.gameObject.SetActive(true);
             }
         }
@@ -155,33 +154,38 @@ public class SpawnRoom : MonoBehaviour
             if (direction == 0)
             {
                 temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 0), Quaternion.identity, stats.Dungeon.transform);
-                if (SecretRoom) temp.name = "Hidden Room";
-                door.gameObject.SetActive(true);
-                if (!SecretRoom) ChooseHallways(2, temp);
+                Label(SecretRoom, temp, 2);
             }
             if (direction == 1)
             {
                 temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 1), Quaternion.identity, stats.Dungeon.transform);
-                if (SecretRoom) temp.name = "Hidden Room";
-                door.gameObject.SetActive(true);
-                if (!SecretRoom) ChooseHallways(3, temp);
+                Label(SecretRoom, temp, 3);
             }
             if (direction == 2)
             {
                 temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 2), Quaternion.identity, stats.Dungeon.transform);
-                if (SecretRoom) temp.name = "Hidden Room";
-                door.gameObject.SetActive(true);
-                if (!SecretRoom) ChooseHallways(0, temp);
+                Label(SecretRoom, temp, 0);
             }
             if (direction == 3)
             {
                 temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 3), Quaternion.identity, stats.Dungeon.transform);
-                if (SecretRoom) temp.name = "Hidden Room";
-                door.gameObject.SetActive(true);
-                if (!SecretRoom) ChooseHallways(1, temp);
+                Label(SecretRoom, temp, 1);
             }
             if(!SecretRoom) stats.MediumRoom--;
         }
+    }
+
+    // Function that labels the room appropriately depending on if it's a Hidden, Exit, Random Room.
+    private void Label(bool SecretRoom,GameObject temp, int direction)
+    {
+        if (SecretRoom) temp.name = "Hidden Room";
+        else ChooseHallways(direction, temp);
+        if (stats.MediumRoom == 1)
+        {
+            temp.name = "Exit Room";
+            stats.ExitRoomObjects(temp);
+        }
+        door.gameObject.SetActive(true);
     }
 
     // Randomly picks a side to generate a hallway

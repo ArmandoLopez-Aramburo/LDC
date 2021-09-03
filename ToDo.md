@@ -38,3 +38,5 @@ Lineage Dungeon Crawler
 
 - [X] Start room needs to be created.
 	- [X] Have entries be randomly selected to generate the hallways etc.
+
+- [X] Fix the code that names rooms and hallways
