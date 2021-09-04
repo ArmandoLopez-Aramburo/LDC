@@ -28,7 +28,7 @@ public class Dashboard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if(Input.GetKeyDown(KeyCode.Tab) && Inventory != null)
         {
             InventoryStatus = !InventoryStatus;
             Inventory.SetActive(InventoryStatus);
@@ -39,13 +39,13 @@ public class Dashboard : MonoBehaviour
             StartBattle();
         }
 
-        if(Input.GetKeyDown(KeyCode.J))
+        if(Input.GetKeyDown(KeyCode.J) && Journal != null)
         {
             JournalStatus = !JournalStatus;
             Journal.SetActive(JournalStatus);
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && QuitPanel != null)
         {
             QuitStatus = !QuitStatus;
             QuitPanel.SetActive(QuitStatus);
@@ -60,5 +60,17 @@ public class Dashboard : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ExitDungeon()
+    {
+        // display the Analysis Report
+        // then goes to the scene where we'll handle outside dungeon shit.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+    }
+
+    public void EnterDungeon()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
     }
 }

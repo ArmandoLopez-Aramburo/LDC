@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleMap.unity
     guid: 888bc8d81a029af4099da021c8dc9a99
+  - enabled: 1
+    path: Assets/Scenes/Downtime.unity
+    guid: 6fabff75ebf7c26409d6810576a262a3
   m_configObjects: {}
