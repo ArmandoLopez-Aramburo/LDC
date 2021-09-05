@@ -24,7 +24,7 @@ public class SpawnRoom : MonoBehaviour
         templates = GameObject.FindGameObjectWithTag("Templates").GetComponent<DungeonPrefabs>();
         stats = GameObject.FindGameObjectWithTag("Level").GetComponent<LevelGeneration>();
         door = this.transform.GetChild(0).GetComponentInChildren<DoorWay>();
-        Invoke("Spawn", 1f);
+        Invoke("Spawn", 0.1f);
     }
 
     // Function Spawner
