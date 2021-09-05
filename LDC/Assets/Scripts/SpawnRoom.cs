@@ -14,7 +14,6 @@ public class SpawnRoom : MonoBehaviour
     private DungeonPrefabs templates;
     private DoorWay door;
     private LevelGeneration stats;
-
     private GameObject temp;
 
     private int rand;
@@ -25,7 +24,7 @@ public class SpawnRoom : MonoBehaviour
         templates = GameObject.FindGameObjectWithTag("Templates").GetComponent<DungeonPrefabs>();
         stats = GameObject.FindGameObjectWithTag("Level").GetComponent<LevelGeneration>();
         door = this.transform.GetChild(0).GetComponentInChildren<DoorWay>();
-        Invoke("Spawn", 0.1f);
+        Invoke("Spawn", 1f);
     }
 
     // Function Spawner
@@ -66,7 +65,6 @@ public class SpawnRoom : MonoBehaviour
             
             if(stats.M_HiddenRooms)
             {
-                Debug.Log("Hidden Room");
                 if (roomType == "hallway")
                 {
                     if (OpeningDirection == 0)
@@ -102,7 +100,6 @@ public class SpawnRoom : MonoBehaviour
                 if (OpeningDirection == 1)
                 {
                     rand = Random.Range(0, templates.LR_Hallways.Length);
-                    Debug.Log(rand);
                     RoomSpawner(1, rand, false);
                 }
                 if (OpeningDirection == 2)
@@ -124,66 +121,80 @@ public class SpawnRoom : MonoBehaviour
     void RoomSpawner(int direction, int rand, bool SecretRoom)
     {
         // If room Type is "room" and not a Secret Room spawn a Hallway
+        // Needs to check if there's a pre-existing room in that location and if so don't generate room.
         if (roomType == "room" && !SecretRoom)
         {
             if (direction == 0)
             {
                 temp = Instantiate(templates.TD_Hallways[rand], this.transform.position + GetLocation(templates.TD_Hallways[rand], 0), Quaternion.identity, stats.Dungeon.transform);
-                door.gameObject.SetActive(true);
+                Label(SecretRoom, temp, 2, roomType);
+                //door.gameObject.SetActive(true);
             }
             if (direction == 1)
             {
                 temp = Instantiate(templates.LR_Hallways[rand], this.transform.position + GetLocation(templates.LR_Hallways[rand], 1), Quaternion.identity, stats.Dungeon.transform);
-                door.gameObject.SetActive(true);
+                Label(SecretRoom, temp, 3, roomType);
+                //door.gameObject.SetActive(true);
             }
             if (direction == 2)
             {
                 temp = Instantiate(templates.TD_Hallways[rand], this.transform.position + GetLocation(templates.TD_Hallways[rand], 2), Quaternion.identity, stats.Dungeon.transform);
-                door.gameObject.SetActive(true);
+                Label(SecretRoom, temp, 0, roomType);
+                //door.gameObject.SetActive(true);
             }
             if (direction == 3)
             {
                 temp = Instantiate(templates.LR_Hallways[rand], this.transform.position + GetLocation(templates.LR_Hallways[rand], 3), Quaternion.identity, stats.Dungeon.transform);
-                door.gameObject.SetActive(true);
+                Label(SecretRoom, temp, 1, roomType);
+                //door.gameObject.SetActive(true);
             }
         }
 
         // If room Type is "hallway" spawn a room and if that room is not a Secret Room then create other spawn locations.
+        // Needs to check if there's a pre-existing room in that location and if so don't generate room.
         else if (roomType == "hallway")
         {
             if (direction == 0)
             {
                 temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 0), Quaternion.identity, stats.Dungeon.transform);
-                Label(SecretRoom, temp, 2);
+                Label(SecretRoom, temp, 2, roomType);
             }
             if (direction == 1)
             {
                 temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 1), Quaternion.identity, stats.Dungeon.transform);
-                Label(SecretRoom, temp, 3);
+                Label(SecretRoom, temp, 3, roomType);
             }
             if (direction == 2)
             {
                 temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 2), Quaternion.identity, stats.Dungeon.transform);
-                Label(SecretRoom, temp, 0);
+                Label(SecretRoom, temp, 0, roomType);
             }
             if (direction == 3)
             {
                 temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 3), Quaternion.identity, stats.Dungeon.transform);
-                Label(SecretRoom, temp, 1);
+                Label(SecretRoom, temp, 1, roomType);
             }
             if(!SecretRoom) stats.MediumRoom--;
         }
     }
 
     // Function that labels the room appropriately depending on if it's a Hidden, Exit, Random Room.
-    private void Label(bool SecretRoom,GameObject temp, int direction)
+    private void Label(bool SecretRoom,GameObject temp, int direction, string roomType)
     {
-        if (SecretRoom) temp.name = "Hidden Room";
-        else ChooseHallways(direction, temp);
-        if (stats.MediumRoom == 1)
+        if(roomType == "room")
         {
-            temp.name = "Exit Room";
-            stats.ExitRoomObjects(temp);
+            temp.name = "Hallway";
+        }
+        else
+        {
+            if (roomType == "hallway") temp.name = "Basic Room";
+            if (stats.MediumRoom == 1)
+            {
+                temp.name = "Exit Room";
+                stats.ExitRoomObjects(temp);
+            }
+            if (SecretRoom) temp.name = "Hidden Room";
+            else ChooseHallways(direction, temp);
         }
         door.gameObject.SetActive(true);
     }
@@ -232,14 +243,19 @@ public class SpawnRoom : MonoBehaviour
         if(collision.CompareTag("SpawnPoint") && collision.GetComponent<SpawnRoom>().Spawned == true)
         {
             this.gameObject.SetActive(false);
-            //Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
+        // If statement so it won't spawn a room that's already been spawned.
         if (collision.CompareTag("SpawnPoint") && this.Spawned == true)
         {
             collision.gameObject.SetActive(false);
             Destroy(collision.gameObject);
         }
     }
-
-    // Need a Room Check to see if there's a room there already, might need to make the size bigger and check it before placing down a room.
+       
+    private void RoomHasSpawned(GameObject temp)
+    {
+        Debug.Log(temp.name);
+        temp.GetComponent<RoomInfo>().RoomExists = true;
+    } 
 }

@@ -1299,7 +1299,6 @@ MonoBehaviour:
   OpeningDirection: 1
   roomType: hallway
   Spawned: 0
-  OpenHallway: 1
 --- !u!61 &3207561522173528573
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1695,7 +1694,6 @@ MonoBehaviour:
   OpeningDirection: 0
   roomType: hallway
   Spawned: 0
-  OpenHallway: 1
 --- !u!61 &3448082497891255053
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2592,7 +2590,6 @@ MonoBehaviour:
   OpeningDirection: 3
   roomType: hallway
   Spawned: 0
-  OpenHallway: 1
 --- !u!61 &6097199796218182710
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2688,7 +2685,6 @@ MonoBehaviour:
   OpeningDirection: 2
   roomType: hallway
   Spawned: 0
-  OpenHallway: 1
 --- !u!61 &3998636180593488867
 BoxCollider2D:
   m_ObjectHideFlags: 0
