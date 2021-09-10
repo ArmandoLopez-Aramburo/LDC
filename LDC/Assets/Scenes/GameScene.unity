@@ -3199,11 +3199,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 4749363371622444262}
   Dungeon: {fileID: 1722715891}
-  MediumRoom: 3
+  MediumRoom: 5
   SmallRoom: 0
   startRoom: {fileID: 7501018598434885853, guid: d346893682bc1ba48a2b1b03fcf1bb0a,
     type: 3}
   M_HiddenRooms: 0
+  SpawnList: []
+  Direction: 
 --- !u!4 &8174503228414736605
 Transform:
   m_ObjectHideFlags: 0

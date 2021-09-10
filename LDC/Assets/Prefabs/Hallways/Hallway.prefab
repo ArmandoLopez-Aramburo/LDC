@@ -1117,6 +1117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8555332531962681288}
+  - component: {fileID: 2102588006575189816}
   m_Layer: 0
   m_Name: Hallway
   m_TagString: Untagged
@@ -1141,6 +1142,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2102588006575189816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2803959275179004608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bded24991acf6743a25a0d01c47161f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3190727011266939707
 GameObject:
   m_ObjectHideFlags: 0
@@ -2571,7 +2584,7 @@ Transform:
   m_LocalPosition: {x: -3, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7776021434845279616}
+  - {fileID: 5771115014601258677}
   m_Father: {fileID: 8004489259304420979}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3553,13 +3566,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &2571929190835260055
+--- !u!1001 &1751820214603614626
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 8411692479955869230}
     m_Modifications:
+    - target: {fileID: 5213103156337524500, guid: d36e519bf5a0c2e4fa332b61d7db9a45,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5213103156337524502, guid: d36e519bf5a0c2e4fa332b61d7db9a45,
         type: 3}
       propertyPath: m_Name
@@ -3568,7 +3586,7 @@ PrefabInstance:
     - target: {fileID: 5213103156337524502, guid: d36e519bf5a0c2e4fa332b61d7db9a45,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5213103156337524503, guid: d36e519bf5a0c2e4fa332b61d7db9a45,
         type: 3}
@@ -3627,8 +3645,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5213103156337524507, guid: d36e519bf5a0c2e4fa332b61d7db9a45,
         type: 3}
-      propertyPath: m_AutoTiling
-      value: 0
+      propertyPath: m_Offset.y
+      value: -0.45
       objectReference: {fileID: 0}
     - target: {fileID: 5213103156337524507, guid: d36e519bf5a0c2e4fa332b61d7db9a45,
         type: 3}
@@ -3640,18 +3658,13 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5213103156337524507, guid: d36e519bf5a0c2e4fa332b61d7db9a45,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.45
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d36e519bf5a0c2e4fa332b61d7db9a45, type: 3}
---- !u!4 &7776021434845279616 stripped
+--- !u!4 &5771115014601258677 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5213103156337524503, guid: d36e519bf5a0c2e4fa332b61d7db9a45,
     type: 3}
-  m_PrefabInstance: {fileID: 2571929190835260055}
+  m_PrefabInstance: {fileID: 1751820214603614626}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8652611455552189106
 PrefabInstance:
@@ -3660,6 +3673,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6154636386744071728}
     m_Modifications:
+    - target: {fileID: 5213103156337524500, guid: d36e519bf5a0c2e4fa332b61d7db9a45,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5213103156337524502, guid: d36e519bf5a0c2e4fa332b61d7db9a45,
         type: 3}
       propertyPath: m_Name
@@ -3668,7 +3686,7 @@ PrefabInstance:
     - target: {fileID: 5213103156337524502, guid: d36e519bf5a0c2e4fa332b61d7db9a45,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5213103156337524503, guid: d36e519bf5a0c2e4fa332b61d7db9a45,
         type: 3}

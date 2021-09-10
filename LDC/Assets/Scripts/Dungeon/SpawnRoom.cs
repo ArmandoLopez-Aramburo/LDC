@@ -24,7 +24,8 @@ public class SpawnRoom : MonoBehaviour
         templates = GameObject.FindGameObjectWithTag("Templates").GetComponent<DungeonPrefabs>();
         stats = GameObject.FindGameObjectWithTag("Level").GetComponent<LevelGeneration>();
         door = this.transform.GetChild(0).GetComponentInChildren<DoorWay>();
-        Invoke("Spawn", 0.1f);
+
+        //Invoke("Spawn", 0.1f);
     }
 
     // Function Spawner
@@ -156,6 +157,7 @@ public class SpawnRoom : MonoBehaviour
         {
             if (direction == 0)
             {
+                // Have a separate gameobject on the Hallway prefabs to detect if it does hit a room if so return something.
                 temp = Instantiate(templates.Rooms[rand], this.transform.position + GetLocation(templates.Rooms[rand], 0), Quaternion.identity, stats.Dungeon.transform);
                 Label(SecretRoom, temp, 2, roomType);
             }
@@ -190,8 +192,7 @@ public class SpawnRoom : MonoBehaviour
             if (roomType == "hallway") temp.name = "Basic Room";
             if (stats.MediumRoom == 1)
             {
-                temp.name = "Exit Room";
-                stats.ExitRoomObjects(temp);
+                temp.name = "Exit Room";    
             }
             if (SecretRoom) temp.name = "Hidden Room";
             else ChooseHallways(direction, temp);
@@ -240,22 +241,12 @@ public class SpawnRoom : MonoBehaviour
     // Destroys any other Spawn Location if it collides with another spawn location.
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("SpawnPoint") && collision.GetComponent<SpawnRoom>().Spawned == true)
-        {
-            this.gameObject.SetActive(false);
-            Destroy(this.gameObject);
-        }
-        // If statement so it won't spawn a room that's already been spawned.
+        // Room Check where it deletes the spawnpoint from the room after deleting it from the hallway.
         if (collision.CompareTag("SpawnPoint") && this.Spawned == true)
         {
-            collision.gameObject.SetActive(false);
+            //collision.gameObject.SetActive(false);
             Destroy(collision.gameObject);
+            Destroy(this.gameObject);
         }
     }
-       
-    private void RoomHasSpawned(GameObject temp)
-    {
-        Debug.Log(temp.name);
-        temp.GetComponent<RoomInfo>().RoomExists = true;
-    } 
 }
