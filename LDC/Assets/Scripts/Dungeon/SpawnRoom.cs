@@ -192,8 +192,7 @@ public class SpawnRoom : MonoBehaviour
             if (roomType == "hallway") temp.name = "Basic Room";
             if (stats.MediumRoom == 1)
             {
-                temp.name = "Exit Room";
-                stats.ExitRoomObjects(temp);
+                temp.name = "Exit Room";    
             }
             if (SecretRoom) temp.name = "Hidden Room";
             else ChooseHallways(direction, temp);

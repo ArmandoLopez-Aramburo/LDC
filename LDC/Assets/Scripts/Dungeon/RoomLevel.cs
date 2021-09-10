@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class RoomLevel : MonoBehaviour
 {
-    [SerializeField] public List<GameObject> HallwaysAvailable = new List<GameObject>();
+    [SerializeField] public List<GameObject> AvailableHallways = new List<GameObject>();
     private int rand;
 
     private DungeonPrefabs templates;
     private GameObject door;
     private LevelGeneration stats;
-    private GameObject temp;
+    private GameObject newHallway;
 
     public bool Spawned = false;
 
@@ -18,75 +18,106 @@ public class RoomLevel : MonoBehaviour
     {
         templates = GameObject.FindGameObjectWithTag("Templates").GetComponent<DungeonPrefabs>();
         stats = GameObject.FindGameObjectWithTag("Level").GetComponent<LevelGeneration>();
-        //door = this.transform.GetChild(0).GetComponentInChildren<DoorWay>();
     }
 
-    // Function that chooses which hallway is "open" to be used by the dungeon generation.
-    // Could be later on used for Room's that already have a set opening.
-    public void ChooseHallways(GameObject temp)
+    // Needs to take into account the opening that it came from.
+    public void SelectEntries(GameObject currentRoom)
     {
         int x;
-        for (int i = 0; i < 3; i++)
+        if(!stats.M_HiddenRooms)
         {
-            x = Random.Range(0, 4);
-            temp.transform.GetChild(2).GetChild(x).gameObject.SetActive(true);
-
-            CheckListForDuplicates(HallwaysAvailable, temp.transform.GetChild(2).GetChild(x).gameObject);
+            for (int i = 0; i < 3; i++)
+            {
+                x = Random.Range(0, 4);
+                if (stats.Direction[0] == 5)
+                {
+                    currentRoom.transform.GetChild(2).GetChild(x).gameObject.SetActive(true);
+                    CheckListForDuplicates(AvailableHallways, currentRoom.transform.GetChild(2).GetChild(x).gameObject);
+                }
+                else
+                {
+                    if (x != stats.Direction[0])
+                    {
+                        currentRoom.transform.GetChild(2).GetChild(x).gameObject.SetActive(true);
+                        CheckListForDuplicates(AvailableHallways, currentRoom.transform.GetChild(2).GetChild(x).gameObject);
+                    }
+                }
+            }
         }
-
-        SpawnHallways();
+        else
+        {
+            for (int i = 0; i < 1; i++)
+            {
+                x = Random.Range(0, 4);
+                if (x != stats.Direction[0])
+                {
+                    currentRoom.transform.GetChild(2).GetChild(x).gameObject.SetActive(true);
+                    CheckListForDuplicates(AvailableHallways, currentRoom.transform.GetChild(2).GetChild(x).gameObject);
+                }
+            }
+        }
+        CurrentHallway();
     }
 
-    private void SpawnHallways()
+    // Function that's called to spawn hallways and talks with the LevelGeneration script to continue to the next room generation.
+    public void CurrentHallway()
     {
-        //PrintList();
-        while (HallwaysAvailable.Count > 0)
+        //rand = 0;
+        if(AvailableHallways.Count > 0)
         {
-            rand = 0;
-            RoomSpawner(HallwaysAvailable[0], rand, false);
-            HallwaysAvailable.RemoveAt(0);
-
+            SpawnHallway(AvailableHallways[0], rand, false);
         }
-        stats.SpawnList.RemoveAt(0);
+
+        if (stats.RoomList.Count >= 1 && AvailableHallways.Count == 0)
+        {
+            //Debug.Log("SPAWNING NEXT ROOM");
+            stats.RoomList.RemoveAt(0);
+            stats.Direction.RemoveAt(0);
+            if (stats.RoomList.Count == 0)
+            {
+                Debug.Log("SPAWNLIST COUNT: " + stats.RoomList.Count);
+                Debug.Log("Finished Generating Dungeon.");
+                stats.ClearRooms();
+            }
+            stats.Generate();
+        }
     }
 
-    void RoomSpawner(GameObject SpawnPoint, int rand, bool SecretRoom)
+    // Function that spawns all the "open" hallways
+    public void SpawnHallway(GameObject SpawnPoint, int rand, bool SecretRoom)
     {
-        
-        // If room Type is "room" and not a Secret Room spawn a Hallway
-        // Needs to check if there's a pre-existing room in that location and if so don't generate room.
-        // TEMP IS THE HALLWAY
+        // If not a Secret Room spawn a Hallway
         if (!SecretRoom)
         {
             door = SpawnPoint.transform.GetChild(0).gameObject;
             if (SpawnPoint.name == "Top")
             {
-                temp = Instantiate(templates.TD_Hallways[rand], SpawnPoint.transform.position + GetLocation(templates.TD_Hallways[rand], 0), Quaternion.identity, stats.Dungeon.transform);
-                stats.Label(false, temp, 0, door, "room");
-                temp.GetComponent<HallwayLevel>().ChooseRoom(temp, 0);
+                newHallway = Instantiate(templates.TD_Hallways[rand], SpawnPoint.transform.position + GetLocation(templates.TD_Hallways[rand], 0), Quaternion.identity, stats.Dungeon.transform);
+                stats.Label(false, newHallway, 0, door, "room", this.gameObject);
+                newHallway.GetComponent<HallwayLevel>().SelectRoom(newHallway, 0, this.gameObject);
             }
             if (SpawnPoint.name == "Right")
             {
-                temp = Instantiate(templates.LR_Hallways[rand], SpawnPoint.transform.position + GetLocation(templates.LR_Hallways[rand], 1), Quaternion.identity, stats.Dungeon.transform);
-                stats.Label(false, temp, 1, door, "room");
-                temp.GetComponent<HallwayLevel>().ChooseRoom(temp, 1);
+                newHallway = Instantiate(templates.LR_Hallways[rand], SpawnPoint.transform.position + GetLocation(templates.LR_Hallways[rand], 1), Quaternion.identity, stats.Dungeon.transform);
+                stats.Label(false, newHallway, 1, door, "room", this.gameObject);
+                newHallway.GetComponent<HallwayLevel>().SelectRoom(newHallway, 1, this.gameObject);
             }
             if (SpawnPoint.name == "Bottom")
             {
-                temp = Instantiate(templates.TD_Hallways[rand], SpawnPoint.transform.position + GetLocation(templates.TD_Hallways[rand], 2), Quaternion.identity, stats.Dungeon.transform);
-                stats.Label(false, temp, 2, door, "room");
-                temp.GetComponent<HallwayLevel>().ChooseRoom(temp, 2);
+                newHallway = Instantiate(templates.TD_Hallways[rand], SpawnPoint.transform.position + GetLocation(templates.TD_Hallways[rand], 2), Quaternion.identity, stats.Dungeon.transform);
+                stats.Label(false, newHallway, 2, door, "room", this.gameObject);
+                newHallway.GetComponent<HallwayLevel>().SelectRoom(newHallway, 2, this.gameObject);
             }
             if (SpawnPoint.name == "Left")
             {
-                temp = Instantiate(templates.LR_Hallways[rand], SpawnPoint.transform.position + GetLocation(templates.LR_Hallways[rand], 3), Quaternion.identity, stats.Dungeon.transform);
-                stats.Label(false, temp, 3, door, "room");
-                temp.GetComponent<HallwayLevel>().ChooseRoom(temp, 3);
+                newHallway = Instantiate(templates.LR_Hallways[rand], SpawnPoint.transform.position + GetLocation(templates.LR_Hallways[rand], 3), Quaternion.identity, stats.Dungeon.transform);
+                stats.Label(false, newHallway, 3, door, "room", this.gameObject);
+                newHallway.GetComponent<HallwayLevel>().SelectRoom(newHallway, 3, this.gameObject);
             }
         }
     }
 
-    // Get's the position of the spawner.
+    // Function that get's the location of the spawner to be used to place the hallway in the correct spot
     private Vector3 GetLocation(GameObject temp, int direction)
     {
         // 0:Top, 1:Right, 2:Bottom, 3:Left
@@ -110,17 +141,19 @@ public class RoomLevel : MonoBehaviour
         return spawnLocation;
     }
 
+    // Function used to check if a gameobject already exists in the list.
     private void CheckListForDuplicates(List<GameObject> list, GameObject temp)
     {
         if(!list.Contains(temp))
         {
-            HallwaysAvailable.Add(temp);
+            AvailableHallways.Add(temp);
         }
     }
 
+    // Function to print out the hallway list
     private void PrintList()
     {
-        foreach (var x in HallwaysAvailable)
+        foreach (var x in AvailableHallways)
         {
             Debug.Log(x.name);
         }
