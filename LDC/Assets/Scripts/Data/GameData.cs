@@ -21,5 +21,4 @@ public class GameData : MonoBehaviour
     {
         DontDestroyOnLoad(this);
     }
-
 }
