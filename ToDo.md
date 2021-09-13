@@ -15,9 +15,9 @@ Lineage Dungeon Crawler
 
 - [ ] Analysis Report upon exit
 
-- [ ] Room Collisions so we don't have any rooms generate ontop of previously created rooms
+- [ ] Multiple Saves Functionality
 
-- [ ] Add in a Save System.
+- [ ] Exit Area needs a door/staircase leading out of the dungeon or down to the next dungeon.
 
 ### Done
 
@@ -41,3 +41,7 @@ Lineage Dungeon Crawler
 - [X] Fix the code that names rooms and hallways
 
 - [X] Start room entry/exit button so the user can leave the dungeon per every 5 levels cleared
+
+- [X] Room Collisions so we don't have any rooms generate ontop of previously created rooms
+
+- [X] Add in a Save System.
