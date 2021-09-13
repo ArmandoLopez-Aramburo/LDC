@@ -3,10 +3,6 @@ Lineage Dungeon Crawler
 
 ### Todo
 
-- [ ] Room Collisions so we don't have any rooms generate ontop of previously created rooms
-
-- [ ] Add in a Save System.
-
 - [ ] Add in Spawnable Enemies.
 
 - [ ] Add in Spawnable chests.
@@ -17,8 +13,11 @@ Lineage Dungeon Crawler
 
 ### In Progress
 
-- [ ] Start room entry/exit button so the user can leave the dungeon per every 5 levels cleared
-	- [ ] Analysis Report upon exit
+- [ ] Analysis Report upon exit
+
+- [ ] Room Collisions so we don't have any rooms generate ontop of previously created rooms
+
+- [ ] Add in a Save System.
 
 ### Done
 
@@ -40,3 +39,5 @@ Lineage Dungeon Crawler
 	- [X] Have entries be randomly selected to generate the hallways etc.
 
 - [X] Fix the code that names rooms and hallways
+
+- [X] Start room entry/exit button so the user can leave the dungeon per every 5 levels cleared
