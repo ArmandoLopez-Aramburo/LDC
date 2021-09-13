@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class VillageBuilder : MonoBehaviour
 {
-    public string Name;
-    public int Population;
-    public Vector3 location;
+
+    [SerializeField] public string Name;
+    [SerializeField] public int Population;
+    [SerializeField] public Vector3 location;
 
     private int AvailableProfessions;
 
-    private string temp;
-
-    private VillageData data;
+    private string temp = "";
 
     public List<string> TownProfessions = new List<string>();
 
@@ -98,22 +97,24 @@ public class VillageBuilder : MonoBehaviour
         Debug.Log(temp);
     }
 
-    // Function that calls the Save Function on the SaveSystem script
-    public void SaveVillage()
+    // Function that updates the WorldData village portion with the newest variables
+    public void SaveVillage(WorldData data)
     {
-        SaveSystem.SaveWorld(this);
+        Debug.Log(this.Population);
+
+        data.VillageInfo(this);
+        //VillageData.instance.VillageInfo(this);
     }
 
-    // Function that calls the Load Function on the SaveSystem script
-    public void LoadVillage()
+    // Function that updates the variables with the newest variables on WorldData
+    public void LoadVillage(WorldData data)
     {
-        VillageData data = SaveSystem.LoadWorld();
         if (TownProfessions.Count != 0)
         {
             TownProfessions.Clear();
             temp = null;
         }
-
+        Population = data.Population;
         Name = data.VillageName;
         Population = data.Population;
         location.x = data.Location[0];

@@ -31,7 +31,6 @@ public class Pastime : MonoBehaviour
             Year++;
             Month -= 12;
         }
-        Debug.Log("Year: " + Year + " Month: " + Month + " Day: " + Day);
     }
 
     public void Work()
@@ -43,5 +42,25 @@ public class Pastime : MonoBehaviour
     public void Train()
     {
         Debug.Log("TRAINING.....");
+    }
+
+    // Function that updates the WorldData detail portion with the newest variables
+    public void SaveDetails(WorldData data)
+    {
+        Debug.Log("Year: " + Year + " Month: " + Month + " Day: " + Day);
+        Debug.Log("Player: " + gp);
+        data.DetailData(this);
+
+    }
+
+    // Function that updates the variables with the newest variables on WorldData
+    public void LoadDetails(WorldData data)
+    {
+        Day = data.Day;
+        Month = data.Month;
+        Year = data.Year = Year;
+        gp = data.gp;
+        Debug.Log("Year: " + Year + " Month: " + Month + " Day: " + Day);
+        Debug.Log("Player gp: " + gp);
     }
 }

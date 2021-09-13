@@ -612,6 +612,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1936982408}
+  - {fileID: 2116764773}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -682,8 +683,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 433.88995, y: -236.25}
-  m_SizeDelta: {x: 867.7799, y: 67.5}
+  m_AnchoredPosition: {x: 392.31, y: -239.65202}
+  m_SizeDelta: {x: 784.62, y: 68.47201}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &446118879
 MonoBehaviour:
@@ -812,8 +813,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 433.88995, y: -168.75}
-  m_SizeDelta: {x: 867.7799, y: 67.5}
+  m_AnchoredPosition: {x: 392.31, y: -171.18002}
+  m_SizeDelta: {x: 784.62, y: 68.47201}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &515093588
 MonoBehaviour:
@@ -858,8 +859,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1936982409}
-        m_MethodName: LoadVillage
+      - m_Target: {fileID: 2116764774}
+        m_MethodName: LoadWorld
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2573,8 +2574,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 433.88995, y: -33.75}
-  m_SizeDelta: {x: 867.7799, y: 67.5}
+  m_AnchoredPosition: {x: 392.31, y: -34.236004}
+  m_SizeDelta: {x: 784.62, y: 68.47201}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1684219748
 MonoBehaviour:
@@ -2703,8 +2704,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 433.88995, y: -101.25}
-  m_SizeDelta: {x: 867.7799, y: 67.5}
+  m_AnchoredPosition: {x: 392.31, y: -102.70801}
+  m_SizeDelta: {x: 784.62, y: 68.47201}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1689724703
 MonoBehaviour:
@@ -2749,8 +2750,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1936982409}
-        m_MethodName: SaveVillage
+      - m_Target: {fileID: 2116764774}
+        m_MethodName: SaveWorld
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3088,6 +3089,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fc6e5d7c5694747854a996ffd3044e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Day: 0
+  Month: 0
+  Year: 0
+  gp: 0
 --- !u!1 &1982847274
 GameObject:
   m_ObjectHideFlags: 0
@@ -3221,3 +3226,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982847274}
   m_CullTransparentMesh: 0
+--- !u!1 &2116764772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2116764773}
+  - component: {fileID: 2116764774}
+  - component: {fileID: 2116764775}
+  m_Layer: 0
+  m_Name: SaveSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2116764773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116764772}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 398336174}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2116764774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116764772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4961ebb51dc344aa113bb670e2d5c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WorldData: {fileID: 1936982407}
+--- !u!114 &2116764775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116764772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dede4feb99c8864781869625a687d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
