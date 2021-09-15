@@ -9,10 +9,10 @@ using System;
 public class SaveSystem : MonoBehaviour
 {
     // Function that Saves the World data
-    public void SaveWorld(WorldData data)
+    public void SaveWorld(WorldData data, int saveSlot)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Path.Combine(Application.persistentDataPath, "worlddata.poop");
+        string path = Path.Combine(Application.persistentDataPath, "worlddata" + saveSlot + ".poop");
         FileStream file = File.Create(path);
 
         try
@@ -30,9 +30,9 @@ public class SaveSystem : MonoBehaviour
     }
 
     // Function used to load the data from the file
-    public WorldData LoadWorld()
+    public WorldData LoadWorld(int loadSlot)
     {
-        string path = Path.Combine(Application.persistentDataPath, "worlddata.poop");
+        string path = Path.Combine(Application.persistentDataPath, "worlddata" + loadSlot + ".poop");
         using (FileStream stream = File.Open(path, FileMode.Open))
         {
             try
