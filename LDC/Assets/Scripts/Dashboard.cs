@@ -47,7 +47,15 @@ public class Dashboard : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Escape) && QuitPanel != null)
         {
-            if(this.transform.GetChild(1).GetComponent<ModifyData>().currentPanel == null)
+            if(this.transform.childCount > 0)
+            {
+                if (this.transform.GetChild(1).GetComponent<ModifyData>().currentPanel == null)
+                {
+                    QuitStatus = !QuitStatus;
+                    QuitPanel.SetActive(QuitStatus);
+                }
+            }
+            else
             {
                 QuitStatus = !QuitStatus;
                 QuitPanel.SetActive(QuitStatus);
